@@ -25,10 +25,9 @@ details change. `art-prep` works from the pixels you already have:
   everything with a README of what was changed and offers to file it.
 
 ### Install
-**Claude (web/desktop):** download `art-prep.zip` from the
-[latest release](../../releases/latest), then in Claude go to
-**Customize → Skills → upload** and choose the ZIP. Skills are per account on
-Free/Pro/Max plans; each person uploads their own.
+**Claude (web/desktop):** download
+[art-prep.zip](https://github.com/mtnears/claude-skills/releases/latest/download/art-prep.zip)
+(not the "Source code" zip), then in Claude go to
 
 **Claude Code / other Agent Skills tools:** copy the `art-prep` folder into your skills
 directory (for Claude Code: `~/.claude/skills/art-prep`).
