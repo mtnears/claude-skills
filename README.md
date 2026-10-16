@@ -28,6 +28,8 @@ details change. `art-prep` works from the pixels you already have:
 **Claude (web/desktop):** download
 [art-prep.zip](https://github.com/mtnears/claude-skills/releases/latest/download/art-prep.zip)
 (not the "Source code" zip), then in Claude go to
+**Customize → Skills → upload** and choose the ZIP. Skills are per account on
+Free/Pro/Max plans; each person uploads their own.
 
 **Claude Code / other Agent Skills tools:** copy the `art-prep` folder into your skills
 directory (for Claude Code: `~/.claude/skills/art-prep`).
@@ -36,9 +38,10 @@ Then just ask, e.g. *"Prep this logo for a 3 inch die-cut sticker"* or
 *"Clean this ChatGPT image up for my UV printer"*.
 
 ### Before first use
-- Edit `art-prep/references/devices.md` to match your machines (choke settings,
-  file formats, max screen colours).
-- Edit `art-prep/references/archive.md` with where finished art should be filed.
+- Tell Claude about your machines the first time (UV printer white choke, cutter file
+  formats, max screen colours) and where finished art should be filed. To make it
+  permanent, edit `references/devices.md` and `references/archive.md` inside the skill
+  before uploading it.
 - Do one test print or cut before a production run: device software can read sizes differently.
 
 ### Requirements
