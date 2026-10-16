@@ -52,5 +52,10 @@ explains the one-time setup, and a no-AI fallback is always available.
 ## A note on safety
 Skills can run code. Read a skill (it's short) before installing it, this one included.
 
+## Support
+If this saves you a reprint or two, you can
+[sponsor me on GitHub](https://github.com/sponsors/mtnears). Totally optional;
+the skill is free either way.
+
 ## License
 MIT. Use it, change it, share it. Issues and suggestions welcome.
