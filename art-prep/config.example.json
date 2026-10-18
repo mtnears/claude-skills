@@ -1,0 +1,8 @@
+{
+  "owner": "Your name or business",
+  "archive_root": "C:\\Users\\you\\OneDrive\\Documents\\Digital Assets",
+  "scripts_home": "C:\\Users\\you\\OneDrive\\Documents\\Digital Assets\\_Common\\art-prep-scripts",
+  "package_path": "{client}\\Artwork\\{title} {yyyy-mm}",
+  "clients": ["Client A", "Project B"],
+  "root_readme": "README.md"
+}

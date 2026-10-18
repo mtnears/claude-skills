@@ -1,35 +1,46 @@
 # Archiving finished art
 
-Set this up once for your own storage. Claude asks before copying anything.
+Where packages go is **set by the person**, not by the skill. Read `config.json` beside
+`SKILL.md`:
 
-**Root:** `<your asset folder>`. Replace this line with your path, e.g.
-`C:\Users\<you>\OneDrive\Documents\Business\Digital Assets\`. If you keep a README in that
-folder describing your layout, Claude reads it first and follows it over this file.
-
-Suggested layout (client or project first, then kind of asset):
+```json
+{ "owner": "Name", "archive_root": "C:\\path\\to\\Digital Assets",
+  "scripts_home": "C:\\path\\to\\Digital Assets\\_Common\\art-prep-scripts",
+  "package_path": "{client}\\Artwork\\{title} {yyyy-mm}",
+  "clients": ["Client A", "Project B"], "root_readme": "README.md" }
 ```
-Digital Assets\
-  _Common\                      brand, fonts, templates, jigs: used across clients
+If it's missing, ask: "Where should finished packages go?" (and the scripts folder), offer to
+save the answer in `config.json`, and carry on. If the archive root has a `README.md`,
+**read it before filing**: it wins over anything here (layout, naming, versions).
+
+## Default layout (when the root has no README of its own)
+```
+<archive_root>\
+  _Common\                      shared: brand, fonts, templates, scripts
   <Client or Project>\
-    Artwork\<Title YYYY-MM>\    art-prep packages go here
-    Designs\<Item>\             native working files (cutter, UV printer, 3D, laser projects)
-    Reference\                  photos, scans, what the client sent
+    Artwork\<Title YYYY-MM>\    art-prep packages
+    Designs\<Item>\             native working files (.lds, .empf, .3mf/.stl, ...)
+    Reference\                  what the client sent, scans, photos
 ```
 
-## Where a package goes
-`<root>\<Client or Project>\Artwork\<Title> <YYYY-MM>\` holding the package layout
-(`00-source`, `01-master`, `02-outputs\<use>`, `03-previews`, `README.txt`).
-- Use an existing client/project folder when one matches; ask before creating a new one.
-- Device project files from the job go in `Designs\<Item>\`, named `<Item>_<variant>_<device>.<ext>`.
-- Never overwrite a released package (sent, approved, produced): a revision becomes
-  `<Title> <YYYY-MM> v2`. Cloud version history covers working edits.
-- `00-source` holds the file exactly as received; never edited.
+## Rules
+- Use the existing client/project folder when one matches; for a new one, ask, then create it
+  with the same three subfolders.
+- Package layout inside: `00-source` (original exactly as received, name ends `_ORIGINAL`,
+  never edited), `01-master`, `02-outputs\<use>`, `03-previews`, `README.txt`.
+- Never overwrite a released package (sent, approved, produced): a revision is
+  `<Title> <YYYY-MM> v2`.
 - The README records the source (AI prompt if any) and every change.
+- Keep one client's customer details out of other clients' notes.
+- Art from other people: keep their files, leave personal details (emails, phones,
+  addresses) out of README and file names.
+- Device project files (a Leonardo .lds, an eufyMake .empf) go in `Designs\<Item>\`, named
+  `<Item>_<variant>_<device>.<ext>`.
 
 ## Doing the copy
-- If the asset folder is connected to the session, ask once ("File it in
-  Digital Assets\<Client>\Artwork\<Title YYYY-MM>?") and copy only after a yes.
-- If it isn't connected, hand over the ZIP and give the exact folder to put it in.
-- Art from other people: keep their files, but leave their personal details (emails,
-  phone numbers, addresses) out of README and file names.
-- If no root is set yet, ask the user where finished art should live.
+- If the archive folder is connected (the linked computer), ask once ("File it in
+  <client>\Artwork\<title>?") and copy only after a yes. Moves and deletes need their OK.
+- Large files: the folder tool may reject files over ~30 MB. Send those through the chat
+  file-send first, then commit them by the file id it returns; small files can go directly.
+- Not connected: hand over the ZIP and give the exact folder to put it in.
+- After copying, list the destination and check the file count and sizes.

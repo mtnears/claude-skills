@@ -1,0 +1,11 @@
+{
+  "_about": "Worked example: the 'challenge coin' depth map built for a medallion illustration (native 1254 px). Heights: field 10 < scenery <= ~100 < borders+lettering+stars 150 < flag and 250 numerals 196 < Jeep 234.",
+  "field": 10, "bevel": 3.5, "rim_px": 9, "max": 245, "smooth": 0.9,
+  "tiers": [
+    {"name": "scenery", "mask": "scene", "level": 75, "gradient_y": [300, 820, 0.5, 1.0], "luma": 0.3, "detail": 0.3, "bevel": 0},
+    {"name": "borders", "colour": {"L_min": 62, "chroma_max": 28}, "minus": ["scene"], "level": 150},
+    {"name": "numerals", "mask": "num", "level": 196, "detail": 0.03},
+    {"name": "flag", "mask": "flag", "level": 196, "luma": 0.04, "detail": 0.03},
+    {"name": "jeep", "mask": "jeep", "level": 234, "luma": 0.06, "detail": 0.02}
+  ]
+}

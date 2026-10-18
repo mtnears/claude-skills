@@ -8,8 +8,8 @@ PKGDIR already holds the files, laid out per the archive structure
 (00-source/, 01-master/, 02-outputs/<use>/, 03-previews/).
 manifest.json (written by Claude for this job):
 {
-  "title": "Club event logo",
-  "client": "Car Club",             "project": "2027 Spring Meet",
+  "title": "Grand Sport Homecoming logo",
+  "client": "GSR / GSCE",            "project": "2027 Homecoming",
   "date": "2026-10-16",
   "source": "ChatGPT image, prompt: ...  (or: sent by <role>, original file name ...)",
   "changes": ["ghost pixels cleared (alpha < 16)", "letter holes cleared", ...],

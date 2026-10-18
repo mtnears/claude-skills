@@ -1,7 +1,7 @@
 # Devices and what they need
 
-Settings below were verified on real equipment in Oct 2026. Edit this file to match your
-own machines and software versions; Claude reads it before building device outputs.
+Settings below come from the owner's own equipment (Oct 2026). When a device or its
+software changes, update this file.
 
 ## eufyMake UV printer (eufyMake Studio)
 - **Imports:** JPEG, PNG, JPG, WEBP, SVG, PSD, AI, PDF, EMPF, GIF. Send **PNG** with
@@ -18,6 +18,15 @@ own machines and software versions; Claude reads it before building device outpu
 - **Craft modes:** Flat, Flat Raised, Pattern/Relief/Brushstroke texture. Raised modes
   stack white for height, so stray pixels become bumps. Clean even more strictly
   (`--speck-px 50`).
+- **Custom depth map** (3D texture / relief): import a greyscale map the same shape as the
+  art: black = lowest, white = tallest, outside the art pure black. Rules from eufyMake's
+  guide: taper the outer rim (Edge Darken), no flat pure-white tops (bevel, cap ~245),
+  smooth gradients, no isolated specks. Build it with `depthmap.py` (see `relief.md`);
+  total height in mm is set in Studio. Validated Oct 2026: 4 in medallion at 2.5 mm,
+  built from a tier map, printed clean beside Studio's own texture mapping, which gives
+  fewer controls and no reusable file.
+- Studio import limits that matter when filing: keep each file under ~30 MB for the
+  chat-to-folder copy (not a Studio limit).
 - **Built-in tools** (Remove BG, Cutout, Upscale, Offset, Convert to Contour, Vectorize):
   fine for quick jobs. Its Upscale/Remove BG may regenerate or guess edges; for art that
   must stay exact, do those steps here and import the result.
@@ -39,12 +48,20 @@ own machines and software versions; Claude reads it before building device outpu
   art. Cutting on the art edge (`--offset-mm 0`) needs a solid outline plus bleed.
 
 ## Screen printing
-- Set your press's maximum colours here (e.g. up to 7) so separations stay within it.
+- Presses differ: ask the person how many colours/screens their press (or their printer's)
+  takes. Spot-colour jobs usually run 4-7 inks.
 - Films: one black-on-white TIF per ink at print size (`plate_NN_<hex>.tif`), LZW,
   DPI tagged. Underbase plate for dark garments, choked 0.3 mm by default.
 - Print order in `separations.json`: underbase, then inks light to dark.
 - `--garment HEX`: art colour matching the shirt gets no ink (the shirt shows through).
 - `--palette` when the inks are already chosen (match their actual ink colours).
+- Pantone Solid Coated + Cotton TCX codes and a printer spec sheet come from
+  `pantone_match.py` + `spec_sheet.py` (see `colour.md`). Plates: LZW TIFF, black = ink,
+  one canvas for all films, no trapping/registration marks.
+- A flat-colour logo on a light shirt works well as 4-5 inks with the panel colour left
+  as the shirt (validated on a five-colour logo: reconstructed print vs art mean dE76
+  about 3, no ink outside the art). Dark shirts add a white underbase and a light-colour
+  plate (more screens).
 - Not done here: halftones / simulated process for gradients. For photographic art say
   so and suggest DTF/DTG or a separation program. Test new plates with the shop or press
   before a production run; settings will be adjusted after the first real test.
