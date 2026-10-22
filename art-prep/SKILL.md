@@ -1,6 +1,6 @@
 ---
 name: "art-prep"
-description: Prepare artwork for production without redrawing it - AI-generated images, logos, and art other people send in. Inspects for print/cut problems, cleans transparency, upscales faithfully, and builds outputs for UV printing (flat, or raised with a custom depth map), print-and-cut and die-cut stickers, screen-print colour separations with Pantone codes and a printer spec sheet, shirts/DTF, decals and web. Asks for the output type, size, colours and (for relief) the look and texture when not given; always shows a draft for approval before building the package, then offers to archive it. Also answers "what can you do?". Use whenever someone wants to clean up, upscale, get "high-res" or print-ready files from an image, make a sticker/decal/cut file, a raised UV depth map or relief, prep art for a UV printer or shirt, separate colours for screen printing, fix transparency or white edges, or file finished art - even if they don't say "art prep".
+description: Prepare artwork for production without redrawing it - AI-generated images, logos, and art other people send in. Inspects for print/cut problems, cleans transparency, upscales faithfully, and builds outputs for UV printing (flat, or raised with a custom depth map), print-and-cut and die-cut stickers, screen-print colour separations with Pantone codes and a printer spec sheet, laser cut/etch SVGs with kerf and fit (xTool and similar), shirts/DTF, decals and web. Asks for the output type, size, colours and (for relief) the look and texture when not given; always shows a draft for approval before building the package, then offers to archive it. Also answers "what can you do?". Use whenever someone wants to clean up, upscale, get "high-res" or print-ready files from an image, make a sticker/decal/cut file, laser cut or etch files, a kerf or fit test plate, a raised UV depth map or relief, prep art for a UV printer or shirt, separate colours for screen printing, fix transparency or white edges, or file finished art - even if they don't say "art prep".
 ---
 
 # Art prep
@@ -21,7 +21,8 @@ can't drift. An image model asked to "make it high-res" draws a new picture; thi
   **Never assume someone else's paths.**
 - Details per device and per use: `references/devices.md`. Output menu and feasibility:
   `references/outputs.md`. Relief / depth maps: `references/relief.md`. Colours, Pantone,
-  garments: `references/colour.md`. Filing: `references/archive.md`.
+  garments: `references/colour.md`. Laser cut/etch, kerf, fit: `references/laser.md`.
+  Filing: `references/archive.md`.
 
 ## "What can you do?" (help)
 If asked what this can do, what outputs exist, or how it works: answer from
@@ -35,8 +36,10 @@ finished packages if the archive has any.
 Get the file into the working directory. Then settle, **asking for whatever wasn't said**
 (one short message; offer choices and always allow a write-in):
 1. **Output type** (if not stated): UV print flat / UV raised with depth map / print-and-cut
-   sticker / die-cut / screen print (garment colour, ink count) / DTF-DTG shirt / web /
-   "other: tell me". Several are fine.
+   sticker / die-cut / screen print (garment colour, ink count) / DTF-DTG shirt / laser cut or
+   etch / web / "other: tell me". Several are fine. For laser, also ask the machine and module,
+   material and thickness, and what is cut vs etched (see `references/laser.md`; use a
+   stored profile for that combination or offer the reference plate first).
 2. **Physical size** (width in inches) for each use.
 3. **Colours** where the output needs them: shirt or background colour (mockups and the
    garment-matching ink), ink colours (screen print). If they give hex, Pantone or other
@@ -86,6 +89,8 @@ plus the use-specific drafts:
 - **Screen print:** `separations.py` preview, ink swatches with their codes, and a garment
   mockup (`shirt_mockup.py`) on the shirt colour(s) they gave.
 - **Sticker / cut:** `*_cut_preview.png`. **UV:** `*_white_check.png`.
+- **Laser:** the preview PNG from `laser_prep.py` (islands numbered, bridges and thin spots
+  marked) before any SVG is built for a real cut.
 Ask for approval or changes. **Don't build the package until they approve**; iterate one
 preview at a time.
 
@@ -122,6 +127,7 @@ larger files through the chat file-send first and commit from there.
 | Print-and-cut sticker | `--speck-px 25 --hard 128` | `cutline.py --offset-mm 1.5 --border white`: `_print.png` + `_cut.svg` |
 | Die-cut on art edge | same | `cutline.py --offset-mm 0 --bleed-mm 1` (solid outline only) |
 | Screen print | `--hard 128` | `separations.py --colors N --garment HEX` (flat art), or `--palette` for chosen inks |
+| Laser cut / etch (xTool) | `--hard 128` or none | `laser_prep.py --mode stencil/inlay/stack/positive/engrave` (SVG in mm); first time per material: `--mode reference` plate; flat STL: `stl_to_cut.py` |
 | DTF/DTG shirt, web | `--speck-px 25 --defringe` | cleaned PNG / 4x master; previews on light and dark |
 
 `upscale.py IN OUT --method ai|lanczos`. AI (Real-ESRGAN) needs a one-time install each new
@@ -144,6 +150,10 @@ of art. A container restart kills a running upscale: restart it.
 - Depth maps: heights come from what things **are**, never from colour; build masks first and
   approve the overlay; avoid flat white tops (cap ~245) and keep the area outside the art
   pure black; keep bevels and the rim taper so edges aren't cliffs.
+- Laser: kerf and fit belong to one material + thickness + laser + settings. Cut the reference
+  plate once per combination (engrave first, then cut), measure, and store a profile; piece and
+  hole kerf differ and each differs by direction. Inside calipers read holes small; trust the
+  fit test. A wrong-size import is often a stale synced file.
 - `pkill -f "<pattern>"` inside a command kills its own shell when the command text contains
   the pattern; use PIDs.
 - Never write another person's paths or details into their package; use `config.json`.

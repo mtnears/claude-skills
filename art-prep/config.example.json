@@ -3,6 +3,28 @@
   "archive_root": "C:\\Users\\you\\OneDrive\\Documents\\Digital Assets",
   "scripts_home": "C:\\Users\\you\\OneDrive\\Documents\\Digital Assets\\_Common\\art-prep-scripts",
   "package_path": "{client}\\Artwork\\{title} {yyyy-mm}",
-  "clients": ["Client A", "Project B"],
-  "root_readme": "README.md"
+  "clients": [
+    "Client A",
+    "Project B"
+  ],
+  "root_readme": "README.md",
+  "laser_profiles": {
+    "example-01": {
+      "laser": "Machine and module",
+      "material": "Material, thickness",
+      "thickness_mm": 3.0,
+      "kerf_piece_xy_mm": [
+        0.0,
+        0.0
+      ],
+      "kerf_hole_xy_mm": [
+        0.0,
+        0.0
+      ],
+      "fit_press_mm": 0.02,
+      "fit_glue_mm": 0.05,
+      "cut_settings": "power / speed / passes as used",
+      "notes": "from the reference plate, date"
+    }
+  }
 }

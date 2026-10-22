@@ -15,6 +15,7 @@ Ask an image generator for "high-res" and it draws a *new* picture: lettering dr
   - **Raised UV / relief:** a custom **depth map** (black low, white tall) designed from what each part of the art *is*: coin, patch, leather, embroidery, wood or your own tier list, with optional texture. Masks and settings are kept so it can be changed and rebuilt.
   - **Print-and-cut stickers:** print PNG with bleed + SVG cut line in mm (written around Siser Leonardo)
   - **Screen printing:** spot-colour film plates, nearest Pantone / Cotton TCX codes, a printer spec sheet (PDF), and shirt mockups on your garment colour; honest warning when the art is too photographic for spot colours
+  - **Laser cut and etch (xTool and similar):** traces the art to SVG in real millimetres (red = cut, blue = engrave). Pop-out stencils with the loose centres of A, R, O handled (kept as numbered pieces, or held by bridges), cut-out pieces, inlays with a measured press fit, stacked glue-up layers, and engrave fills. It also builds a **reference plate** you cut once per material, thickness and laser, which measures your kerf (separately for pieces and holes and for each direction), finds your fit, and checks the machine's scale. Your numbers are stored as a profile so later jobs come out the right size. It can also turn a flat 3D model (STL relief or extrusion) into a cut outline in real millimetres. *Validated on a 10 W diode with 3 mm black acrylic (reference plate, and an STL figure cut); the logo stencil/inlay/stack builds are generated and previewed but still need real cuts, and CO2/UV are not yet validated.*
   - **DTF/DTG shirts** and **web/social** versions
   - Something else? It checks whether it can be done from the pixels, builds it as a one-off, then asks whether to add it to the skill.
 - **Shows a draft for your approval** before it builds the package, then packages everything with a README of what was changed and offers to file it.
@@ -26,7 +27,7 @@ Ask an image generator for "high-res" and it draws a *new* picture: lettering dr
 
 **Claude Code / other Agent Skills tools:** copy the `art-prep` folder into your skills directory (for Claude Code: `~/.claude/skills/art-prep`).
 
-Then just ask, e.g. *"Prep this logo for a 3 inch die-cut sticker"*, *"Make a raised UV depth map for this medallion"*, or *"Separate this logo for a 5-ink screen print on a heather gray tee."*
+Then just ask, e.g. *"Cut this logo out of 3 mm acrylic on my xTool"*, *"Prep this logo for a 3 inch die-cut sticker"*, *"Make a raised UV depth map for this medallion"*, or *"Separate this logo for a 5-ink screen print on a heather gray tee."*
 
 ### Before first use
 1. Copy `config.example.json` to `config.json` inside the skill and fill in where finished art should be filed (`archive_root`) and, optionally, a shared scripts folder (`scripts_home`). If you skip this, Claude asks the first time. Your `config.json` stays on your machine; don't commit it.
@@ -34,7 +35,7 @@ Then just ask, e.g. *"Prep this logo for a 3 inch die-cut sticker"*, *"Make a ra
 3. Do **one test print or cut** before a production run: device software can read sizes differently. Depth maps especially: print a small version first and tune the tier heights.
 
 ### Requirements
-Python 3 with numpy, Pillow and OpenCV (Claude's sandbox has these or installs them); `reportlab` for the printer spec sheet. The AI upscale also needs PyTorch + spandrel and the Real-ESRGAN weights; the script header explains the one-time setup, and a no-AI fallback is always available. Pantone lookups use the offline `pantone-cli` npm package (needs Node; matches are approximate and the printer confirms them against a swatch book).
+Python 3 with numpy, Pillow and OpenCV (Claude's sandbox has these or installs them); `reportlab` for the printer spec sheet; `shapely` for laser files. The AI upscale also needs PyTorch + spandrel and the Real-ESRGAN weights; the script header explains the one-time setup, and a no-AI fallback is always available. Pantone lookups use the offline `pantone-cli` npm package (needs Node; matches are approximate and the printer confirms them against a swatch book).
 
 ### A note on safety
 Skills can run code. Read a skill (it's short) before installing it, this one included.

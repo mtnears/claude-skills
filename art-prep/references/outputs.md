@@ -11,13 +11,14 @@ to judge outputs that aren't listed.
 | **Print-and-cut sticker** (Leonardo) | width, border colour | print PNG + exact cut-line SVG |
 | **Die-cut on the art edge** | width; solid outline needed | cut path with bleed |
 | **Screen print, spot colours** | shirt/garment colour, ink count, width; hex/Pantone if you have them | one film per ink, Pantone + Cotton TCX codes, printer spec sheet, shirt mockups |
+| **Laser cut / etch** (xTool, diode / CO2 / UV) | machine + module, material + thickness, size, what is cut vs etched, loose centres or bridges | SVG in real mm (red = cut, blue = engrave): stencil, pieces, inlay with fit, stacked layers, engrave fill; a reference plate to measure kerf and fit; a profile record |
 | **DTF / DTG shirt** | width, shirt colour | 4x clean PNG, previews on light and dark |
 | **Web / social / email** | max pixel width | optimised PNG |
 | **Upscale / clean only** | target size | 4x master, nothing else |
 | **Other** | describe the process or device | feasibility check, a one-off build, then I ask if you want it added |
 
 Not supported (say so): halftones/simulated-process separations for photos, vectorising
-photographic art, redrawing or "improving" the art, printer ink formulas, trapping and
+photographic art, laser power/speed recommendations (record what was used instead), redrawing or "improving" the art, printer ink formulas, trapping and
 registration marks (the printer adds those).
 
 ## Feasibility check for an unlisted output
