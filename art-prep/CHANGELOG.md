@@ -1,6 +1,7 @@
 # art-prep changelog
 
 ## v2.2 (2026-10-21)
+- Fix (2026-10-22): skill description shortened to under 1,024 characters so the zip uploads to Claude.
 - New: `scripts/stl_to_cut.py` turns a flat STL (relief/extrusion) into a cut SVG in mm.
   Cut on an xTool M2 10 W diode: fine.
 - Engrave font underlines 6/9/M/W so "which way is up" is unambiguous on test pieces; the
